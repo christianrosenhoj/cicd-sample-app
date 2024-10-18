@@ -18,11 +18,17 @@ pipeline {
             }
         }
         stage('Build') {
+	  when{
+	  	changeset '**/*'
+	  }
             steps {
                 build 'BuildSampleApp'
             }
         }
         stage('Results') {
+	  when{
+	  	changeset '**/*'
+	  }        
             steps {
                 build 'TestSampleApp'
             }
