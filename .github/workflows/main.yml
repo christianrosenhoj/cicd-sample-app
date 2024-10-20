@@ -25,6 +25,6 @@ jobs:
         run: |
           git config --global user.name 'Christian Rosenhoj'
           git config --global user.email 'christian.rosenhoj@student.hogent.be'
-          git add ./cicd-sample-app/static/style.css
+          git add ./static/style.css
           git commit -m "GITHUB ACTIONS update background color to ${{ env.color }}"
           git push
