@@ -12,9 +12,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         
-      - name: List directory content
-        run: ls -R
-        
       - name: Random color
         run: |
           COLOR=$(printf '#%06X\n' $(( RANDOM * RANDOM )))
@@ -22,7 +19,7 @@ jobs:
 
       - name: Update background
         run: |
-          sed -i 's/background: .*/background: ${{ env.color }};/' ./cicd-sample-app/static/style.css
+          sed -i 's/background: .*/background: ${{ env.color }};/' ./static/style.css
 
       - name: Commit update
         run: |
