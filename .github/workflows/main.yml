@@ -1,0 +1,31 @@
+name: Automatically update color in cicd-sample-app
+
+on:
+  schedule:
+    - cron: '* * * * *'
+    
+jobs:
+  update-color:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Random color
+      run: |
+        COLOR=$(printf '#%06X' $((RANDOM * RANDOM)))
+        echo "color=$COLOR" >> $GITHUB_ENV
+
+    - name: Update background
+      run: |
+        sed -i 's/background: .*/background: ${{env.color}};/' ./cicd-sample-app/static/style.css
+
+    - name: Commit update
+      run: |
+        git config --global user.name 'Christian Rosenhoj'
+        git config --global user.email 'christian.rosenhoj@student.hogent.be'
+        git add ./cicd-sample-app/static/style.css
+        git commit -m "GITHUB ACTIONS update background color to ${{env.color}}"
+        git push
+        
