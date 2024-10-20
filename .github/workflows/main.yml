@@ -14,7 +14,7 @@ jobs:
         
       - name: Random color
         run: |
-          COLOR=$(printf '#%06X\n' $(( RANDOM * RANDOM )))
+          COLOR=$(printf '#%06X' $(( RANDOM % 0x1000000 )))
           echo "color=$COLOR" >> $GITHUB_ENV
 
       - name: Update background
