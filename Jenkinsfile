@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Pull from Git') {
             steps {
-                git 'https://github.com/christianrosenhoj/cicd-sample-app.git' // Correct URL
+                git 'https://github.com/christianrosenhoj/cicd-sample-app'
             }
         }
         stage('Build') {
