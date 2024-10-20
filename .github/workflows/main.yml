@@ -2,7 +2,7 @@ name: Automatically update color in cicd-sample-app
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   update-color:
