@@ -1,37 +1,14 @@
-pipeline {
-    agent any
-    triggers {
-        pollSCM('* * * * *') // Polls the SCM every minute
-    }
-    stages {
+node {
         stage('Preparation') {
-            steps {
-                catchError(buildResult: 'SUCCESS') {
-                    sh 'docker stop samplerunning'
-                    sh 'docker rm samplerunning'
-                }
-            }
-        }
-        stage('Pull from Git') {
-            steps {
-                git 'https://github.com/christianrosenhoj/cicd-sample-app.git' // Replace with your actual repo URL
+            catchError(buildResult: 'SUCCESS') {
+                sh 'docker stop samplerunning'
+                sh 'docker rm samplerunning'
             }
         }
         stage('Build') {
-	  when{
-	  	changeset '**/*'
-	  }
-            steps {
-                build 'BuildSampleApp'
-            }
+            build 'BuildSampleApp'
         }
         stage('Results') {
-	  when{
-	  	changeset '**/*'
-	  }        
-            steps {
-                build 'TestSampleApp'
-            }
+            build 'TestSampleApp'
         }
     }
-}
