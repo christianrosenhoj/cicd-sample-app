@@ -1,9 +1,5 @@
 name: Automatically update color in cicd-sample-app
 
-on:
-  schedule:
-    - cron: '0 0 * * *'
-
 jobs:
   update-color:
     runs-on: ubuntu-latest
